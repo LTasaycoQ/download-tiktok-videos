@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargar Video</title>
+</head>
+
+<body>
+
+    <nav>
+        <div style="display: flex;align-items: center; position: relative; top: 10px;">
+            <img src="https://www.designpieces.com/assets/wp-content/uploads/2020/12/TikTok-Logo-768x432.png"
+                alt="TikTok-Logo" class="icon-nav">
+
+        </div>
+    </nav>
+
+
+    <h1 style="text-align: center;">Descargar Videos de Tik Tok</h1>
+
+
+    <div style=" display:flex; justify-content: center; align-items: center;"">
+    <form action=" /submit" method="post" style="background-color: aquamarine; width: 750px;">
+        <input type="text" id="url_video" name="url_video" style="width: 580px; height: 40px;text-indent: 20px;"
+            placeholder="URL del video">
+        <button onclick="esperando()" type="submit" style="width: 120px; height: 45px;">Buscar</button>
+        </form>
+    </div>
+
+    <div style="display: grid; justify-content: center; align-items: center;">
+        <img style="width: 300px; display: none;" id="image_espera"
+            src="https://i.pinimg.com/originals/cc/0b/d8/cc0bd8d6479721dcb6b5312ca4537da1.gif" />
+    </div>
+
+    <form action="">
+        <input type="text" placeholder="Nombre de tu video" id="nombre" name="nombre">
+        <input type="text" id="url_genera_py" name="url_genera_py" value="{{response}}">
+        <button type="button" id="downloadBtn">Descargar Video</button>
+    </form>
+    <video width="200" poster="{{logo_py}}" height="240" preload="metadata" controls id="video_reproductor"
+        style="display: none;">
+        <source src="{{response}}" type="video/mp4">
+
+    </video>
+
+    <p>{{author_nombre_py}}</p>
+    <p>{{author_nickname_api}}</p>
+    <img src="{{logo_author_api}}" width="50px" height="50px">
+
+
+    <script>
+
+        var url_confir_video = document.getElementById('url_genera_py').value;
+
+        if (url_confir_video != null && url_confir_video != "{{response}}") {
+            document.getElementById('video_reproductor').style.display = "block";
+
+        }
+
+        const gif = document.getElementById('image_espera');
+        const gifDuration = 2000;
+
+        function resetGif() {
+            gif.src = gif.src;
+        }
+
+        function esperando() {
+            document.getElementById('image_espera').style.display = "block"
+        }
+
+        setInterval(resetGif, gifDuration);
+
+
+        function esperando() {
+
+            document.getElementById('image_espera').style.display = "block";
+
+        }
+
+
+        document.getElementById('downloadBtn').addEventListener('click', async function () {
+            const nombre = document.getElementById('nombre').value;
+            const url = document.getElementById('url_genera_py').value;
+
+            if (!nombre || !url) {
+                alert("Por favor, ingresa un nombre y una URL válidos.");
+                return;
+            }
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("Error al descargar el video.");
+
+                const blob = await response.blob();
+                const objectUrl = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = objectUrl;
+                a.download = nombre + '.mp4';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(objectUrl);
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    </script>
+
+    <style>
+        * {
+            margin: 0px;
+        }
+
+        nav {
+            background-color: white;
+            margin-bottom: 20px;
+
+        }
+
+        .icon-nav {
+            width: 65px;
+            height: 40px;
+
+        }
+
+        body {
+            background-color: rgb(255, 255, 255);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</body>
+
+</html>
