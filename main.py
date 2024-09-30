@@ -11,7 +11,7 @@ app = Flask(__name__, template_folder='src')
 conn = http.client.HTTPSConnection("tiktok-scrapper-videos-music-challenges-downloader.p.rapidapi.com")
 
 headers = {
-    'x-rapidapi-key': "a48bd620e4mshcce244fcebce6b1p19bc12jsn0411ee9231cf",
+    'x-rapidapi-key': "8aedb64132mshad3678a060263b6p1b73c8jsnfc25595bcb74",
     'x-rapidapi-host': "tiktok-scrapper-videos-music-challenges-downloader.p.rapidapi.com"
 }
 

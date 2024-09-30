@@ -18,36 +18,59 @@
     </nav>
 
 
-    <h1 style="text-align: center;">Descargar Videos de Tik Tok</h1>
+    <h1 style="text-align: center;margin-top: 100px;"><span style="color: rgb(244, 84, 111);">Descargar</span>  <span style="color:white;">Videos de</span> <span style="color: aqua;">Tik Tok😄</span></h1>
 
 
-    <div style=" display:flex; justify-content: center; align-items: center;"">
-    <form action=" /submit" method="post" style="background-color: aquamarine; width: 750px;">
-        <input type="text" id="url_video" name="url_video" style="width: 580px; height: 40px;text-indent: 20px;"
-            placeholder="URL del video">
-        <button onclick="esperando()" type="submit" style="width: 120px; height: 45px;">Buscar</button>
+    <div style=" display:flex; justify-content: center; align-items: center; margin-top: 50px;">
+        <form action=" /submit" method="post" style="width: 750px;">
+            <input type="text" id="url_video" name="url_video"
+                style="width: 580px; height: 45px;text-indent: 20px; border-radius: 10px 0px 0px 10px;"
+                placeholder="URL del video  ❤️‍🔥">
+            <button onclick="esperando()" type="submit" class="btncompletbuscar"
+                style="width: 120px; height: 50px;border-radius:  0px 10px 10px 0px; background-color: rgb(130, 22, 130);">
+                <h3 style="color: white;" class="buscarbtn">Buscar</h3>
+            </button>
         </form>
     </div>
 
-    <div style="display: grid; justify-content: center; align-items: center;">
+    <div style="display: grid; justify-content: center; align-items: center; margin-top: 50px;">
         <img style="width: 300px; display: none;" id="image_espera"
             src="https://i.pinimg.com/originals/cc/0b/d8/cc0bd8d6479721dcb6b5312ca4537da1.gif" />
     </div>
 
-    <form action="">
-        <input type="text" placeholder="Nombre de tu video" id="nombre" name="nombre">
-        <input type="text" id="url_genera_py" name="url_genera_py" value="{{response}}">
-        <button type="button" id="downloadBtn">Descargar Video</button>
-    </form>
-    <video width="200" poster="{{logo_py}}" height="240" preload="metadata" controls id="video_reproductor"
-        style="display: none;">
-        <source src="{{response}}" type="video/mp4">
 
-    </video>
 
-    <p>{{author_nombre_py}}</p>
-    <p>{{author_nickname_api}}</p>
-    <img src="{{logo_author_api}}" width="50px" height="50px">
+    <div style="display: flex; gap: 40px; justify-content: center; align-items: center;">
+        <video width="200" poster="{{logo_py}}" height="240" preload="metadata" controls id="video_reproductor"
+            style="display: none;">
+            <source src="{{response}}" type="video/mp4">
+
+        </video>
+        <div style="display:none;" id="respuesta_descarga">
+            <div style="display: grid; gap: 25px;">
+                <div style="display: flex; gap:20px; margin-bottom: 18px;">
+                    <img src="{{logo_author_api}}" width="70px" height="70px" style="border-radius: 5px 5px 5px 5px;">
+                    <div>
+                        <p style="font-size: 20px;">{{author_nombre_py}}</p>
+                        <p style="font-size: 15px;">{{author_nickname_api}}</p>
+                    </div>
+                </div>
+                <form action="" style="display: flex; align-items: center;gap: 10px;">
+                    <input style="height: 35px; width: 250px; text-indent: 15px;" type="text"
+                        placeholder="Nombre de tu video" id="nombre" name="nombre">
+                    <input type="text" id="url_genera_py" name="url_genera_py" value="{{response}}"
+                        style="display: none;">
+                    <button style="border: none; background-color: transparent;" type="button" id="downloadBtn"><img
+                            src="https://cdn-icons-png.freepik.com/256/9355/9355561.png?semt=ais_hybrid"
+                            style="width: 40px; border-radius: 10px 10px 10px 10px;" class="btndescarga"></button>
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 
     <script>
@@ -56,11 +79,12 @@
 
         if (url_confir_video != null && url_confir_video != "{{response}}") {
             document.getElementById('video_reproductor').style.display = "block";
+            document.getElementById('respuesta_descarga').style.display = "block";
 
         }
 
         const gif = document.getElementById('image_espera');
-        const gifDuration = 2000;
+        const gifDuration = 8000;
 
         function resetGif() {
             gif.src = gif.src;
@@ -73,11 +97,6 @@
         setInterval(resetGif, gifDuration);
 
 
-        function esperando() {
-
-            document.getElementById('image_espera').style.display = "block";
-
-        }
 
 
         document.getElementById('downloadBtn').addEventListener('click', async function () {
@@ -117,6 +136,7 @@
         nav {
             background-color: white;
             margin-bottom: 20px;
+            height: 60px;
 
         }
 
@@ -127,8 +147,20 @@
         }
 
         body {
-            background-color: rgb(255, 255, 255);
+            background-image: url("https://static.vecteezy.com/system/resources/previews/010/823/943/non_2x/anime-city-night-background-vector.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
             font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .btndescarga:hover {
+            filter: hue-rotate(100deg);
+            cursor: pointer;
+        }
+
+        .btncompletbuscar:hover {
+            background-color: rgb(130, 4, 35);
+            cursor: pointer;
         }
     </style>
 </body>
